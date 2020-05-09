@@ -35,25 +35,19 @@ To be sure ansible is installed and works properly, just check its version as fo
 4. After adding the key to `targets` we can remove `ansible_ssh_pass` from `inventory` file fo it is safe to share.
 5. To check syntax of `playbook` we could use the following command:
   ~~~yaml
-      ansible-playbook snippets.yaml -i inventory.txt --syntax-check
+      ansible-playbook snippets.yaml --syntax-check
   ~~~
-  Inventory file is added to syntax check to prevent the warning:
-  
-    `[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'`
-
-    `[WARNING]: Could not match supplied host pattern, ignoring: targets`
-  
-  Result should be as following:
+Result should be as following:
   ~~~yaml
-   root@your-host:~/ansible# ansible-playbook snippets.yaml -i inventory.txt --syntax-check
+   root@your-host:~/ansible# ansible-playbook snippets.yaml --syntax-check
 
    playbook: snippets.yaml
   ~~~
 6. If syntax is OK we could do the dry run to check the actual operation of our playbook:
 ~~~bash
-    ansible-playbook snippets.yaml -i inventory.txt --check
+    ansible-playbook snippets.yaml --check
 ~~~
 7. Finally if we see no errors in the output of out previous command, we can proceed to real execution of the playbook:
 ~~~bash
-    ansible-playbook snippets.yaml -i inventory.txt
+    ansible-playbook snippets.yaml 
 ~~~
