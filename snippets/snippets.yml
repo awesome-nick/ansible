@@ -8,13 +8,14 @@
       - nginx
       - postgresql
       - sudo
+    # Required for modern distros with python 3.x.x
     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
-    # # Adding key
+    # Adding key
     # - name: Set authorized key taken from file
     #   authorized_key:
-    #     user: charlie
+    #     user: root
     #     state: present
     #     key: "{{ lookup('file', '/root/.ssh/id_rsa_default.pub') }}"
     # Installing list of packages
@@ -33,3 +34,20 @@
         state: latest
         update_cache: yes
       when: ansible_os_family == "Debian"
+    #--------------------------------
+    - name: add the user devops with a bash shell & append admins & sudo groups to user's groups
+      user:
+        name: '{{ item }}'
+        shell: /bin/bash
+        groups: admins, sudo
+        append: yes
+        state: present
+      loop:
+      - devops
+      - developer
+      - tester
+    - name: enable postgresql service
+      service:
+        name: postgresql
+        state: started
+        enabled: yes
