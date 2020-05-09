@@ -1,0 +1,35 @@
+
+-
+  name: ansible snippets playbook
+  hosts: targets
+
+  vars:
+    packages:
+      - nginx
+      - postgresql
+      - sudo
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    # # Adding key
+    # - name: Set authorized key taken from file
+    #   authorized_key:
+    #     user: charlie
+    #     state: present
+    #     key: "{{ lookup('file', '/root/.ssh/id_rsa_default.pub') }}"
+    # Installing list of packages
+    # -----------------------------
+    - name: install packages on distro with yum
+      yum:
+        name: "{{ packages }}"
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "RedHat" or
+            ansible_os_family == "Suse"
+    #-------------------------------
+    - name: install packages on distro with apt
+      apt:
+        name: "{{ packages }}"
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "Debian"

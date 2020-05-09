@@ -1,0 +1,7 @@
+# Key previously install on targets with ansible using password ssh
+target_centos   ansible_host=95.216.206.52 ansible_connection=ssh ansible_user=root
+target_ubuntu   ansible_host=78.47.168.117 ansible_connection=ssh ansible_user=root
+
+[targets]
+target_centos
+target_ubuntu
