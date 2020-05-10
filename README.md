@@ -1,9 +1,11 @@
 # ansible
+![Ansible Logo](https://upload.wikimedia.org/wikipedia/commons/2/24/Ansible_logo.svg)
+
 Learning Ansible: examples of playbooks & snippets
 ==================
 General tips
 ------------------
-1. To install Ansible on your master machine use the appropriate package management tool. Since Debian was used by me, it is as follows:
+1. To install Ansible on your master machine use the appropriate package management tool. Since Debian 10 was used by me, it is as follows:
 ~~~bash
     sudo apt update && sudo apt install ansible -y
 ~~~
@@ -32,8 +34,8 @@ To be sure ansible is installed and works properly, just check its version as fo
             state: present
             key: "{{ lookup('file', '/root/.ssh/id_rsa_default.pub') }}"`
   ~~~
-4. After adding the key to `targets` we can remove `ansible_ssh_pass` from `inventory` file fo it is safe to share.
-5. To check syntax of `playbook` we could use the following command:
+4. After adding the key to `targets` we can remove `ansible_ssh_pass` from `inventory` file so it is safe to share.
+5. To check syntax of `playbook` we could use the following command with `--syntax-check` parameter:
   ~~~yaml
       ansible-playbook snippets.yaml --syntax-check
   ~~~
