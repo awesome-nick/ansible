@@ -22,7 +22,7 @@ To be sure ansible is installed and works properly, just check its version as fo
 ~~~
 2. First we need to set up ssh key for connection (I decided to name this one `id_rsa_default`): 
  ~~~bash
-     ssh-keygen -t -f /root/.ssh/id_rsa_default.pub rsa -C "your.email@email.com"
+     ssh-keygen -t rsa -f /root/.ssh/id_rsa_default -C "your.email@email.com"
 ~~~ 
 3. Then we add the public key to our `targets` servers using Ansible (to do this we should add `ansible_ssh_pass` to our `inventory` file first):
 ~~~yaml

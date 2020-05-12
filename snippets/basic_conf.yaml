@@ -1,0 +1,30 @@
+-
+  name: ansible snippets playbook
+  hosts: targets
+
+  vars:
+    packages:
+      - git
+      - openjdk-8-jre
+    # Required for modern distros with python 3.x.x
+    ansible_python_interpreter: /usr/bin/python3
+
+  tasks:
+    # Adding key
+    #- name: Set authorized key taken from file
+    #  authorized_key:
+    #     user: root
+    #     state: present
+    #     key: "{{ lookup('file', '/root/.ssh/id_rsa_default.pub') }}"
+    # Installing list of packages
+    - name: install packages on distro with apt
+      apt:
+        name: "{{ packages }}"
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: create directory for jenkins
+      file:
+        path: /var/jenkins_slave/node
+        state: directory

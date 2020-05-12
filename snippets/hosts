@@ -1,10 +1,10 @@
-# Key previously install on targets with ansible using password ssh or during creation of VM/droplet etc.
-target_centos   ansible_host=95.216.206.52
-target_ubuntu   ansible_host=78.47.168.117
+# Key previously installed on targets with ansible using password ssh or during creation of VM/droplet etc.
+node1   ansible_host=node1.awesomenick.com ansible_port=2211
+node2   ansible_host=node2.awesomenick.com ansible_port=2211
 
 [targets]
-target_centos
-target_ubuntu
+node1
+node2
 
 [targets.vars]
 ansible_connection=ssh
